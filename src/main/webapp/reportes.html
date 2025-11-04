@@ -18,10 +18,11 @@
 </head>
 <body>
   <h1>IMC Reportes</h1>
+  <div id="nombre-usuario" style="font-weight: bold; color: #34495e; margin-bottom: 1rem;"></div>
+
 
   <h2>Nuevo registro</h2>
   <form id="registroForm">
-    <input type="number" id="usuarioId" placeholder="Usuario ID" required>
     <input type="number" step="0.01" id="peso" placeholder="Peso (kg)" required>
     <input type="number" step="0.01" id="altura" placeholder="Altura (m)" required>
     <input type="date" id="fecha" required>
@@ -50,10 +51,58 @@
 </button>
 
   <script>
-        document.getElementById("registroForm").addEventListener("submit", function (e) {
+      document.addEventListener("DOMContentLoaded", function () {
+  const id_usuario = localStorage.getItem("id_usuario");
+  const nombre = localStorage.getItem("nombre_usuario");
+
+  if (nombre) {
+    document.getElementById("nombre-usuario").textContent = `Bienvenido, ${nombre}`;
+  }
+
+  document.getElementById("salir").addEventListener("click", function () {
+    localStorage.clear();
+    window.location.href = "login.html";
+  });
+
+  if (!id_usuario) {
+    document.getElementById("imc-actual").textContent =
+      "⚠️ No se encontró el ID de usuario en localStorage.";
+    return;
+  }
+
+  fetch(`http://localhost:8080/IMCReportesWebApp/api/registros/${id_usuario}`)
+    .then(response => response.json())
+    .then(data => {
+      const cuerpo = document.getElementById("cuerpo-tabla");
+      cuerpo.innerHTML = "";
+
+      if (data.length === 0) {
+        cuerpo.innerHTML = `<tr><td colspan="6">No hay registros disponibles</td></tr>`;
+        return;
+      }
+
+      data.forEach(registro => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${registro.id}</td>
+          <td>${registro.usuarioId}</td>
+          <td>${registro.peso}</td>
+          <td>${registro.imc.toFixed(2)}</td>
+          <td>${registro.edad}</td>
+          <td>${registro.fechaRegistro}</td>
+        `;
+        cuerpo.appendChild(fila);
+      });
+
+      const ultimo = data[data.length - 1];
+      document.getElementById("imc-actual").textContent =
+        `Tu IMC actual es: ${ultimo.imc.toFixed(2)} (registrado el ${ultimo.fechaRegistro})`;
+    })
+    .catch(error => console.error("Error al cargar registros:", error));
+    document.getElementById("registroForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const usuarioId = document.getElementById("usuarioId").value;
+  const usuarioId = localStorage.getItem("id_usuario");
   const peso = document.getElementById("peso").value;
   const altura = document.getElementById("altura").value;
   const fecha = document.getElementById("fecha").value;
@@ -71,10 +120,10 @@
     altura: parseFloat(altura),
     imc: parseFloat(imc.toFixed(2)),
     fechaRegistro: fecha,
-    edad: 0 // Puedes calcularla si tienes fecha de nacimiento
+    edad: 0
   };
 
-  fetch("/api/registros", {
+  fetch("http://localhost:8080/IMCReportesWebApp/api/registros", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(registro)
@@ -88,12 +137,11 @@
       }
     })
     .catch(error => console.error("Error:", error));
-    if (data.length === 0) {
-  cuerpo.innerHTML = `<tr><td colspan="6">No hay registros disponibles</td></tr>`;
-}
 });
 
-    </script>
+});
+
+     </script>
 
     </body>
 </html>

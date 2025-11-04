@@ -11,7 +11,7 @@ import java.util.List;
 public class RegistroIMCResource {
 
     @GET
-    @Path("/{id_usuario}")
+    @Path("/usuario/{id_usuario}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<RegistroIMC> getPorUsuario(@PathParam("id_usuario") int idUsuario) {
         RegistroIMCDAO dao = new RegistroIMCDAO();

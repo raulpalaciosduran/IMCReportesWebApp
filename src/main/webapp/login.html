@@ -97,35 +97,37 @@
 
   <script>
         document.getElementById("loginForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+        e.preventDefault();
 
-            const nombreUsuario = document.getElementById("nombreUsuario").value;
-            const contraseña = document.getElementById("contraseña").value;
+        const nombreUsuario = document.getElementById("nombreUsuario").value;
+        const contraseña = document.getElementById("contraseña").value;
 
-            fetch("http://localhost:8080/IMCReportesWebApp/api/usuario/login", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({ nombreUsuario, contraseña })
-            })
-              .then(response => {
-                if (!response.ok) throw new Error("Credenciales inválidas");
-                return response.json();
-              })
-              .then(data => {
-                document.getElementById("resultado").textContent = "✅ Login exitoso";
+        fetch("http://localhost:8080/IMCReportesWebApp/api/usuario/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombreUsuario, contraseña })
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Credenciales inválidas");
+            }
+            return response.json();
+          })
+          .then(usuario => {
+            if (usuario && usuario.idUsuario && usuario.nombreCompleto) {
+              localStorage.setItem("id_usuario", usuario.idUsuario);
+              localStorage.setItem("nombre_usuario", usuario.nombreCompleto);
+              window.location.href = "reportes.html";
+            } else {
+              alert("Credenciales inválidas");
+            }
+          })
+          .catch(error => {
+            console.error("Error al iniciar sesión:", error);
+            alert("Error al conectar con el servidor");
+          });
+});
 
-                // 🔐 Guardar id_usuario en localStorage
-                localStorage.setItem("id_usuario", data.id_usuario);
-
-                // 📊 Redirigir a reportes.html
-                window.location.href = "reportes.html";
-              })
-              .catch(error => {
-          document.getElementById("resultado").textContent = "❌ " + error.message;
-       });
-    }); 
   </script>
 </body>
 </html>

@@ -39,9 +39,9 @@
             <version>2.15.2</version>
         </dependency>
 
-    </dependencies>
-    
+    </dependencies>     
     <build>
+        <finalName>IMCReportesWebApp</finalName>
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
