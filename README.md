@@ -1,12 +1,12 @@
-# IMCReportesWebApp 🧠📘
+# IMCReportesWebApp 
 
 Aplicación institucional desarrollada como evidencia académica en la materia **Computación Avanzada en Java**, parte del programa de **Ingeniería en Computación Administrativa** en **Universidad TecMilenio**.
 
-## 🎯 Objetivo
+## Objetivo
 
 Registrar y visualizar reportes de Índice de Masa Corporal (IMC) por usuario, integrando backend en Java EE con frontend modular y base de datos MySQL.
 
-## 🧩 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - 🔙 **Backend:** Java EE, Maven, GlassFish
 - 🌐 **Frontend:** HTML, JavaScript, LocalStorage
@@ -14,7 +14,7 @@ Registrar y visualizar reportes de Índice de Masa Corporal (IMC) por usuario, i
 - 🧠 **IDE:** NetBeans
 - 🧪 **Servidor local:** XAMPP
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 - Registro de usuario con validación
 - Autenticación y persistencia de sesión
@@ -22,7 +22,7 @@ Registrar y visualizar reportes de Índice de Masa Corporal (IMC) por usuario, i
 - Visualización de reportes por usuario
 - Cierre de sesión y redirección segura
 
-## 🧠 Estructura modular
+## Estructura modular
 
 - `index.html` → Bienvenida institucional
 - `registro.html` → Registro de nuevos usuarios
@@ -31,7 +31,7 @@ Registrar y visualizar reportes de Índice de Masa Corporal (IMC) por usuario, i
 - `Registro.java` / `RESTRegistroService.java` → Backend REST
 - `RegistroIMCDAO.java` → Conexión con base de datos
 
-## 📸 Evidencia institucional
+## Evidencia institucional
 
 Este proyecto forma parte del portafolio académico y evidencia digital del alumno, con fines de evaluación, mentoría y documentación técnica.
 
