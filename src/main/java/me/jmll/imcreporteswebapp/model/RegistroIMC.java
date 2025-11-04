@@ -7,17 +7,47 @@ public class RegistroIMC {
     private int usuarioId;
     private double peso;
     private double altura;
+    private int edad;
     private LocalDate fecha;
+    private String fechaRegistro;
+    private double imc;
 
-    public RegistroIMC() {}
 
-    public RegistroIMC(int id, int usuarioId, double peso, double altura, LocalDate fecha) {
+   public RegistroIMC(int id, int usuarioId, double peso, double altura, LocalDate fecha, int edad) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.peso = peso;
         this.altura = altura;
         this.fecha = fecha;
+        this.edad = edad;
     }
+
+    public RegistroIMC() {
+    // Constructor vacío necesario para instanciación sin argumentos
+    }
+    
+    
+    public int getEdad() {
+    return edad;
+    }
+
+    public void setEdad(int edad) {
+    this.edad = edad;
+    }
+
+
+    public String getFechaRegistro() {
+        return fechaRegistro;}
+    
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;}
+
+    public double getImc() {
+        return imc;}
+
+    public void setImc(double imc) {
+        this.imc = imc;}
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

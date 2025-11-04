@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>IMC Reportes WebApp</title>
+  <style>
+    body { font-family: Arial; margin: 2rem; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    input, button { margin: 0.5rem; padding: 0.5rem; }
+    #salir:hover {
+    background-color: #a93226;
+    
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>IMC Reportes</h1>
+
+  <h2>Nuevo registro</h2>
+  <form id="registroForm">
+    <input type="number" id="usuarioId" placeholder="Usuario ID" required>
+    <input type="number" step="0.01" id="peso" placeholder="Peso (kg)" required>
+    <input type="number" step="0.01" id="altura" placeholder="Altura (m)" required>
+    <input type="date" id="fecha" required>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <table id="tabla-registros">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Usuario</th>
+      <th>Peso</th>
+      <th>IMC</th>
+      <th>Edad</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody id="cuerpo-tabla"></tbody>
+</table>
+
+
+<div id="imc-actual" style="margin-top: 20px; font-weight: bold; color: #2c3e50;"></div>
+
+<button id="salir" style="margin-top: 20px; background-color: #c0392b; color: white; font-weight: bold;">
+  Cerrar sesión
+</button>
+
+  <script>
+        document.getElementById("registroForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const usuarioId = document.getElementById("usuarioId").value;
+  const peso = document.getElementById("peso").value;
+  const altura = document.getElementById("altura").value;
+  const fecha = document.getElementById("fecha").value;
+
+  if (!usuarioId || !peso || !altura || !fecha) {
+    alert("Por favor completa todos los campos.");
+    return;
+  }
+
+  const imc = peso / (altura * altura);
+
+  const registro = {
+    usuarioId: parseInt(usuarioId),
+    peso: parseFloat(peso),
+    altura: parseFloat(altura),
+    imc: parseFloat(imc.toFixed(2)),
+    fechaRegistro: fecha,
+    edad: 0 // Puedes calcularla si tienes fecha de nacimiento
+  };
+
+  fetch("/api/registros", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(registro)
+  })
+    .then(response => {
+      if (response.ok) {
+        alert("Registro guardado correctamente.");
+        location.reload();
+      } else {
+        throw new Error("Error al guardar registro");
+      }
+    })
+    .catch(error => console.error("Error:", error));
+    if (data.length === 0) {
+  cuerpo.innerHTML = `<tr><td colspan="6">No hay registros disponibles</td></tr>`;
+}
+});
+
+    </script>
+
+    </body>
+</html>
+

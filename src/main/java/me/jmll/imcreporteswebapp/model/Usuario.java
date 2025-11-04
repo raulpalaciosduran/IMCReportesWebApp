@@ -1,24 +1,77 @@
 package me.jmll.imcreporteswebapp.model;
 
 public class Usuario {
-    private int id;
-    private String nombre;
-    private String correo;
+    private int idUsuario;
+    private String nombreCompleto;
+    private String nombreUsuario;
+    private String contraseña;
+    private int edad;
+    private String sexo;
+    private double estatura;
+    private double peso;
 
-    public Usuario() {}
-
-    public Usuario(int id, String nombre, String correo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
+    // Getters y Setters
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
 
-    public String getCorreo() { return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public double getEstatura() {
+        return estatura;
+    }
+
+    public void setEstatura(double estatura) {
+        this.estatura = estatura;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
 }

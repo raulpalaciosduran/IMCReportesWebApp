@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-  public static Connection conectar() throws SQLException, ClassNotFoundException {
-    String url = "jdbc:mysql://localhost:3306/registros_imc"; // Asegúrate que esta base existe
+  public static Connection getConnection() throws SQLException, ClassNotFoundException {
+    String url = "jdbc:mysql://localhost:3306/imc_reportes";
     String user = "root";
     String password = "";
 
